@@ -1,14 +1,14 @@
-import {
-  PRODUCT_DETAILS_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_LIST_FAIL,
+const {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
-} from "../constants/productsConstants";
+  PRODUCT_LIST_FAIL,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
+} = require('../constants/productsConstants');
 
 export const productListReducer = (
-  state = { loading: true, product: [] },
+  state = { loading: true, products: [] },
   action
 ) => {
   switch (action.type) {
@@ -23,7 +23,7 @@ export const productListReducer = (
   }
 };
 
-export const productsDetailsReducer = (
+export const productDetailsReducer = (
   state = { product: {}, loading: true },
   action
 ) => {

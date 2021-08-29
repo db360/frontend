@@ -1,36 +1,42 @@
-import { BrowserRouter, Route } from "react-router-dom";
-import CartScreen from "./screens/CartScreen";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+import CartScreen from './screens/CartScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
 
-//Components
-import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen";
+function App() {
 
+  const cart = useSelector(state => state.cart);
+  const { cartItems } = cart;
 
-
-export default function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
           <div>
-            <a className="brand" href="/">
-              DaB-Azon
-            </a>
+            <Link className="brand" to="/">
+              DaBazon
+            </Link>
           </div>
           <div>
-            <a href="/cart">Cart</a>
-            <a href="/signin">Sign In</a>
+            <Link to="/cart">Cart
+            {cartItems.length > 0 && (
+              <span className="badge">{cartItems.length}</span>
+            )}
+            </Link>
+            <Link to="/signin">Sign In</Link>
           </div>
         </header>
         <main>
-          <Route parth="/cart/:id?" component={CartScreen}></Route>
+          <Route path="/cart/:id?" component={CartScreen}></Route>
+          <Route path="/product/:id" component={ProductScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
-          <Route path="/product/:id" component={ProductScreen} exact></Route>
         </main>
-        <footer className="row center">David Martinez -2021- All right reserved</footer>
+        <footer className="row center">All right reserved</footer>
       </div>
     </BrowserRouter>
   );
 }
 
-
+export default App;
